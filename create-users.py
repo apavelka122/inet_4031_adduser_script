@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
-#what are these imports being used for?
+#os: Used to interact with the operating system. Specifically, the script uses os.system(cmd) (commented out here) to execute shell commands directly from Python.
+#re: Used for regular expression operations. In this script, it’s used to check if a line begins with the character #.
+#sys: Provides access to system-specific parameters and functions. Here, sys.stdin reads input from standard input, useful for reading lines of text piped into the script.
 import os
 import re
 import sys
@@ -9,6 +11,7 @@ def main():
     for line in sys.stdin:
 
         #this "regular expression" is searching for the presence of a character - what is it and why?
+#checks if the line is a comment
         match = re.match("^#",line)
 
         #what is this field doing?
@@ -17,6 +20,7 @@ def main():
         #what would an appropriate comment be for describing what this IF statement is checking for?
         #what happens if the IF statement evaluates to true?
         #how does this IF statement rely on what happened in the prior two lines of code? The match and fields lines.
+#skip if missing inputs or match is not = to 5 SKIP OVER
         if match or len(fields) != 5:
             continue
 
@@ -35,6 +39,7 @@ def main():
 
         for group in groups:
             #what is this if statement looking for?
+#this check to see if a group needs to be omitted dont group if -
             if group != '-':
                 print("==> Assigning %s to the %s group..." % (username,group))
                 cmd = "/usr/sbin/adduser %s %s" % (username,group)
